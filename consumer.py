@@ -1,7 +1,10 @@
+import imp
+from itertools import count
 import queue
 import json
 import pika , os, sys
-
+import time
+import random
 def main():
 
 # Step 1: Build connection
@@ -15,23 +18,19 @@ def main():
     # Step 3: Declare callback function to get message
 
     def callback(ch, method, properties, body):
-        print(" [x] Received %r" % json.loads(body))
-
+        processingTime = random.randint(1,5)
+        msg = json.loads(body)
+        print(" Message {msg.id}: %r" % msg)
+        time.sleep(processingTime)
+        ch.basic_ack(delivery_tag =method.delivery_tag)
     # Step 4: Get the actuall message from producer.
 
-    channel.basic_consume(queue='queue1', auto_ack=True, on_message_callback=callback)
+    channel.basic_qos(prefetch_count=1)
+    channel.basic_consume(queue='queue1',  on_message_callback=callback)
 
     # Step 5: Cosuming Message:
 
-    print(' [*] Waiting for messages. To exit press CTRL+C')
+    
     channel.start_consuming()
-
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print('Interrupted')
-        try:
-            sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+    print('Message recieved')
+main()
