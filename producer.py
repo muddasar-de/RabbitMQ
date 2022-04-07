@@ -21,8 +21,8 @@ while(True):
         "id": objectId
     }
     channel.basic_publish(exchange="",routing_key="queue1",body=json.dumps(object1))
-
-    print("Sent Message ID: {object1.id}")
+ 
+    print("Sent Message ID: ",objectId)
     time.sleep(processingTime)
     objectId+=1
 

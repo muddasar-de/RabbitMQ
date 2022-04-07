@@ -1,4 +1,3 @@
-import imp
 from itertools import count
 import queue
 import json
@@ -20,7 +19,7 @@ def main():
     def callback(ch, method, properties, body):
         processingTime = random.randint(1,5)
         msg = json.loads(body)
-        print(" Message {msg.id}: %r" % msg)
+        print(" Message : %r" % msg)
         time.sleep(processingTime)
         ch.basic_ack(delivery_tag =method.delivery_tag)
     # Step 4: Get the actuall message from producer.
