@@ -1,5 +1,3 @@
-from email import message
-from multiprocessing import connection
 import pika
 from pika.exchange_type import ExchangeType
 connection_parameters = pika.ConnectionParameters("localhost")
@@ -10,6 +8,12 @@ channel = connection.channel()
 
 channel.exchange_declare(exchange="pubsub", exchange_type=ExchangeType.fanout)
 
-message = "Hello, I am Muddasar"
+channel.exchange_declare(exchange="pubsub1", exchange_type=ExchangeType.fanout)
+
+message = "Hello, I am Producer"
 
 channel.basic_publish(exchange="pubsub",routing_key="",body=message)
+
+print(f"Sent Message : {message}")
+
+connection.close()
