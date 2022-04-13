@@ -15,5 +15,5 @@ message = "Hello, I am Producer"
 channel.basic_publish(exchange="pubsub",routing_key="",body=message)
 
 print(f"Sent Message : {message}")
-
+ 
 connection.close()
