@@ -6,14 +6,14 @@ connection = pika.BlockingConnection(connection_parameters)
 
 channel = connection.channel()
 
-channel.exchange_declare(exchange="routing", exchange_type=ExchangeType.direct)
+channel.exchange_declare(exchange="topicrouting", exchange_type=ExchangeType.topic)
 
 
 message = "Hello, I am sending payment message"
 message1 = "Hello, I am sending analytics message"
 
-channel.basic_publish(exchange="routing",routing_key="paymentsonly",body=message )
-channel.basic_publish(exchange="routing",routing_key="analyticsonly",body=message1 )
+channel.basic_publish(exchange="topicrouting",routing_key="user.pk.payments",body=message )
+channel.basic_publish(exchange="topicrouting",routing_key="user.pk.analytics",body=message1 )
 
 
 print(f"Sent Message : {message}")
