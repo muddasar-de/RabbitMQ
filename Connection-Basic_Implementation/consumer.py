@@ -5,7 +5,6 @@ import pika , os, sys
 import time
 import random
 
-
 def main():
 
 # Step 1: Build connection

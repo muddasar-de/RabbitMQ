@@ -9,7 +9,7 @@ channel = connection.channel()
 
 # Step 2: Declare Queue
 
-channel.queue_declare(queue= "queue1")
+# channel.queue_declare(queue= "queue1")
 
 objectId = 1
 while(True):
