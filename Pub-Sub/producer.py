@@ -8,8 +8,6 @@ channel = connection.channel()
 
 channel.exchange_declare(exchange="pubsub", exchange_type=ExchangeType.fanout)
 
-channel.exchange_declare(exchange="pubsub1", exchange_type=ExchangeType.fanout)
-
 message = "Hello, I am Producer"
 
 channel.basic_publish(exchange="pubsub",routing_key="",body=message)
