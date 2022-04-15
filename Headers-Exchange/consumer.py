@@ -14,9 +14,9 @@ channel = connection.channel()
 queue = channel.queue_declare(queue="", exclusive=True)
 
 bind_args={
-    'x-match' :"all",
-    "name":"Muddasar",
-    "age": 23
+    'x-match' :"any",
+    "name":"Muddasr",
+    "age": 256
 }
 
 channel.queue_bind(

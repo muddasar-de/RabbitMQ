@@ -7,15 +7,15 @@ connection = pika.BlockingConnection(connection_parameters)
 
 channel = connection.channel()
 
-channel.exchange_declare(exchange="hashing_exchange", exchange_type="x-consistent-hash")
+channel.exchange_declare(exchange="altexchange", exchange_type=ExchangeType.fanout)
 
-message = "Hello, I am passing through hashing exchange."
+channel.exchange_declare(exchange="mainexchange", exchange_type=ExchangeType.direct,arguments={"alternate-exchange":"altexchange"})
 
-hashing_key = "Muddasar"
+message = "Hello, I am passing through Producer."
 
 channel.basic_publish(
-    exchange="hashing_exchange",
-    routing_key= hashing_key,
+    exchange="mainexchange",
+    routing_key= "test",
     body=message )
 
 print(f"Sent Message : {message}")
