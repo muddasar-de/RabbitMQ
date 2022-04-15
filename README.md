@@ -29,7 +29,7 @@ There are a few exchange types available: direct, topic, headers and fanout. We'
 Exchange type
 
 
-Default pre-declared names
+Default: pre-declared names
 
 Direct exchange: (Empty string) and amq.direct
 
